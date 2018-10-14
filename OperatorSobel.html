@@ -20,7 +20,8 @@
 			var ctx = canvas.getContext('2d');
 			ctx.drawImage(img, 0, 0);
 			img.style.display = 'none';
-
+			
+			//Заранее создаём используемые переменные
 			var imageData, imageRectData, imageSobelData;
 			var data, dataRect, dataSobel;
 			
@@ -50,18 +51,21 @@
 
 
 		SobelOperator();
-
+		
+		//Считываем полученные пиксели
 		imageSobelData = ctx.getImageData(0, 0, img.width, img.height);
 		dataSobel = imageSobelData.data;
+		//Копируем их буффера в dataSobel
 		for(k = 0; k < dataSobel.length; k++){
 			dataSobel[k] = buffer[k];
 		}
-
+		
+		//Отрисовываем наши изображения
 		ctx.putImageData(imageSobelData, 750, 0);
 		ctx.drawImage(img, 0, 0);
 		}
 
-		//Преобразовываем 
+		//Преобразовываем изображение в ч/б 
 		function grayscale(grayData)
 		{
 			for(var i = 0; i < grayData.data.length; i+=4)
